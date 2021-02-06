@@ -16,3 +16,6 @@ name = "newsletter_service"
 [dependencies]
 actix-rt = "2.0.0"
 actix-web = "3.3.2"
+
+[dev-dependencies]
+reqwest = "0.11.0"

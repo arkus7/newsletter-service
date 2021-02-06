@@ -1014,7 +1014,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "newsletter-service"
+name = "newsletter_service"
 version = "0.1.0"
 dependencies = [
  "actix-rt 2.0.0",

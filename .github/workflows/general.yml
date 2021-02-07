@@ -89,13 +89,12 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
-      - uses: actions-rs/cargo@v1
-        with:
-          command: install
-          args: sqlx-cli -- --version=0.2.0 --no-default-features --features postgres
+
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
+          cargo --version
+          cargo install --version=0.2.0 sqlx-cli --no-default-features --features postgres
           SKIP_DOCKER=true ./scripts/init_db.sh
           SKIP_DOCKER=true ./scripts/run_migrations.sh
       - uses: actions-rs/clippy-check@v1

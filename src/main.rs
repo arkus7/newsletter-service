@@ -1,8 +1,14 @@
+use newsletter_service::configuration::get_configuration;
 use newsletter_service::startup::run;
 use std::net::TcpListener;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let listener = TcpListener::bind("127.0.0.1:8080").expect("Failed to bind to port 8080");
+    let config = get_configuration().expect("Failed to read configuration");
+    let address = format!("127.0.0.1:{}", config.application_port);
+    let listener = TcpListener::bind(address).expect(&format!(
+        "Failed to bind to port {}",
+        config.application_port
+    ));
     run(listener)?.await
 }

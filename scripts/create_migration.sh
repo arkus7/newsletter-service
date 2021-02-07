@@ -13,4 +13,6 @@ SCRIPTS_DIR=$(dirname "$0")
 
 . "${SCRIPTS_DIR}/wait_for_db.sh"
 
+echo "Creating migration ${MIGRATION_NAME}..."
 sqlx migrate add "${MIGRATION_NAME}"
+echo "Migration ${MIGRATION_NAME} created successfully!"

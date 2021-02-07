@@ -92,7 +92,7 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: install
-          args: -- --version=0.2.0 sqlx-cli --no-default-features --features postgres
+          args: sqlx-cli -- --version=0.2.0 --no-default-features --features postgres
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y

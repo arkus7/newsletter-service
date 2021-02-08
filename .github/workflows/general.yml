@@ -34,9 +34,9 @@ jobs:
             ~/.cargo/.crates.toml
             ~/.cargo/.crates2.json
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-v1-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ runner.os }}-cargo-
+            ${{ runner.os }}-v1-cargo-
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
@@ -61,6 +61,7 @@ jobs:
         with:
           command: fmt
           args: --all -- --check
+
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
@@ -89,9 +90,9 @@ jobs:
             ~/.cargo/.crates.toml
             ~/.cargo/.crates2.json
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-v1-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ runner.os }}-cargo-
+            ${{ runner.os }}-v1-cargo-
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
@@ -133,16 +134,15 @@ jobs:
             ~/.cargo/.crates.toml
             ~/.cargo/.crates2.json
             target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-v1-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ runner.os }}-cargo-
+            ${{ runner.os }}-v1-cargo-
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
           cargo install --version=0.2.0 sqlx-cli --no-default-features --features postgres
           SKIP_DOCKER=true ./scripts/init_db.sh
           SKIP_DOCKER=true ./scripts/run_migrations.sh
-
       - name: Run cargo-tarpaulin
         uses: actions-rs/tarpaulin@v0.1
         with:

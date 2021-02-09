@@ -11,9 +11,6 @@ async fn main() -> std::io::Result<()> {
         .expect("Failed to connect to the database");
 
     let address = format!("127.0.0.1:{}", config.application_port);
-    let listener = TcpListener::bind(address).expect(&format!(
-        "Failed to bind to port {}",
-        config.application_port
-    ));
+    let listener = TcpListener::bind(address).expect("Failed to bind to port");
     run(listener, connection_pool)?.await
 }

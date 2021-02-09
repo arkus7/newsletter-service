@@ -2,11 +2,11 @@ mod test_helpers;
 
 #[actix_rt::test]
 async fn health_check_works() {
-    let address = test_helpers::spawn_app();
+    let app = test_helpers::spawn_app().await;
     let client = reqwest::Client::new();
 
     let response = client
-        .get(&format!("{}/health_check", &address))
+        .get(&format!("{}/health_check", &app.address))
         .send()
         .await
         .expect("Failed to execute request");

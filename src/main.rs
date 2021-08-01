@@ -6,7 +6,8 @@ use std::net::TcpListener;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let logs_subscriber = get_logs_subscriber("newsletter_service".into(), "info".into());
+    let logs_subscriber =
+        get_logs_subscriber("newsletter_service".into(), "info".into(), std::io::stdout);
     init_logs_subscriber(logs_subscriber);
 
     let config = get_configuration().expect("Failed to read configuration");

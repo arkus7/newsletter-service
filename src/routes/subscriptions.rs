@@ -9,6 +9,7 @@ pub struct SubscribeFormData {
     name: String,
 }
 
+#[allow(clippy::async_yields_async)] // tracing lib issue: https://github.com/tokio-rs/tracing/issues/1450
 #[tracing::instrument(
     name = "Adding a new subscriber",
     skip(form, pool),
